@@ -189,7 +189,7 @@ public class MyLinkedList<AnyType> implements Iterable<AnyType> {
     public static void main(String args[]) {
 
         Scanner keyboard = new Scanner(System.in);
-        MyLinkedList myList = new MyLinkedList();
+        MyLinkedList<Integer> myList = new MyLinkedList<Integer>();
         boolean userExit = false;
 
         do {
@@ -209,7 +209,7 @@ public class MyLinkedList<AnyType> implements Iterable<AnyType> {
                 case '3':
                     myList.showList();
                     System.out.println("SEARCH AN ELEMENT BY IT'S INDEX");
-                    System.out.print("INDEX: ");
+                    System.out.print("INDEX: 1 3 5 4");
                     int index = keyboard.nextInt();
                     index = index - 1;
                     System.out.println("\nSEARCH RESULTS\nREAL_INDEX: " + index + "\nVALUE: " + myList.get(index));
