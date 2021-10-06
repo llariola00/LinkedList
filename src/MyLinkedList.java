@@ -1,3 +1,6 @@
+import java.util.Arrays;
+import java.util.Scanner;
+
 /**
  * @author Lestat Louis C Ariola BSIT-IS 2A 2021-2022 PERFORMANCE TASK 3:
  *         LinkedList
@@ -5,6 +8,7 @@
 public class MyLinkedList<AnyType> implements Iterable<AnyType> {
 
     private static class Node<AnyType> {
+
         public Node(AnyType d, Node<AnyType> p, Node<AnyType> n) {
             data = d;
             prev = p;
@@ -141,6 +145,42 @@ public class MyLinkedList<AnyType> implements Iterable<AnyType> {
         }
     }
 
+    public void showMenu() {
+
+        System.out.println("\n\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
+        System.out.println("[1] SHOW LIST \n[2] ADD \n[3] SEARCH \n[4] REMOVE\n[5] REPLACE \n[6] EXIT \n[7] SORT \n");
+
+        System.out.print("YOUR CHOICE: ");
+    }
+
+    public void showList() {
+
+        if (!isEmpty()) {
+
+            sort();
+            for (int i = 0; i < size(); i++) {
+                int idx = i + 1;
+                System.out.println("[" + idx + "] " + this.get(i));
+            }
+        } else {
+            System.out.println("ARRAY IS EMPTY!!!");
+        }
+    }
+
+    public void sort() {
+
+        Integer[] tempIntegers = new Integer[theSize];
+
+        for (int i = 0; i < size(); i++) {
+            tempIntegers[i] = (Integer) this.get(i);
+        }
+        Arrays.sort(tempIntegers);
+
+        for (int i = 0; i < tempIntegers.length; i++) {
+            this.set(i, (AnyType) tempIntegers[i]);
+        }
+    }
+
     private int theSize;
     private int modCount;
     private Node<AnyType> beginMarker;
@@ -148,20 +188,64 @@ public class MyLinkedList<AnyType> implements Iterable<AnyType> {
 
     public static void main(String args[]) {
 
+        Scanner keyboard = new Scanner(System.in);
         MyLinkedList myList = new MyLinkedList();
+        boolean userExit = false;
 
-        for (int i = 0; i < 10; i++)
-            myList.add(i);
+        do {
+            myList.showMenu();
+            char choice = keyboard.next().charAt(0);
 
-        System.out.println();
+            switch (choice) {
+                case '1':
+                    myList.showList();
+                    break;
+                case '2':
+                    System.out.println("ADD AN ELEMENT");
+                    System.out.print("ELEMENT: ");
+                    Integer element = keyboard.nextInt();
+                    myList.add(element);
+                    break;
+                case '3':
+                    myList.showList();
+                    System.out.println("SEARCH AN ELEMENT BY IT'S INDEX");
+                    System.out.print("INDEX: ");
+                    int index = keyboard.nextInt();
+                    index = index - 1;
+                    System.out.println("\nSEARCH RESULTS\nREAL_INDEX: " + index + "\nVALUE: " + myList.get(index));
+                    break;
+                case '4':
+                    myList.showList();
+                    System.out.println("REMOVE AN ELEMENT");
+                    System.out.print("INDEX OF ELEMENT: ");
+                    int idxToRemove = keyboard.nextInt();
+                    idxToRemove--;
+                    myList.remove(idxToRemove);
+                    System.out.println("ELEMENT REMOVED");
+                    myList.showList();
+                    break;
+                case '5':
+                    myList.showList();
+                    System.out.println("REPLACE AN ELEMENT");
+                    System.out.print("INDEX TO REPLACE: ");
+                    int idxToReplace = keyboard.nextInt();
+                    idxToReplace--;
 
-        for (int i = 0; i < 5; i++)
-            System.out.println(myList.remove(i));
+                    System.out.print("NEW VALUE: ");
+                    Integer newValue = keyboard.nextInt();
+                    myList.set(idxToReplace, newValue);
 
-        System.out.println();
-
-        for (int i = 0; i < 5; i++)
-            System.out.print(myList.get(i));
-
+                    System.out.println("ELEMENT REPLACED");
+                    myList.showList();
+                    break;
+                case '6':
+                    userExit = true;
+                    keyboard.close();
+                    System.out.println("PROGRAM EXITING... ");
+                    break;
+                default:
+                    System.out.println("INVALID CHOICE. [1 - 6] ONLY");
+            }
+        } while (!userExit);
     }
 }
