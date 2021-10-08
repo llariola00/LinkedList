@@ -148,7 +148,7 @@ public class MyLinkedList<AnyType> implements Iterable<AnyType> {
     public void showMenu() {
 
         System.out.println("\n\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
-        System.out.println("[1] SHOW LIST \n[2] ADD \n[3] SEARCH \n[4] REMOVE\n[5] REPLACE \n[6] EXIT \n[7] SORT \n");
+        System.out.println("[1] SHOW LIST \n[2] ADD \n[3] SEARCH \n[4] REMOVE\n[5] REPLACE \n[6] EXIT \n");
 
         System.out.print("YOUR CHOICE: ");
     }
@@ -209,7 +209,7 @@ public class MyLinkedList<AnyType> implements Iterable<AnyType> {
                 case '3':
                     myList.showList();
                     System.out.println("SEARCH AN ELEMENT BY IT'S INDEX");
-                    System.out.print("INDEX: 1 3 5 4");
+                    System.out.print("INDEX: ");
                     int index = keyboard.nextInt();
                     index = index - 1;
                     System.out.println("\nSEARCH RESULTS\nREAL_INDEX: " + index + "\nVALUE: " + myList.get(index));
